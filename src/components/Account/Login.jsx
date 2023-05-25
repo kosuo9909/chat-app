@@ -61,6 +61,12 @@ const Login = () => {
             });
             setFormContents({ email: '', password: '' });
           }
+          if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
+            setErrors({
+              general: 'Incorrect password. Please try again.',
+            });
+            setFormContents({ password: '' });
+          }
         });
     }
   };
