@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   .login {
     display: flex;
     align-items: center;
@@ -19,15 +18,16 @@
     flex-direction: column;
 
     p {
-      color: $text-color-darker-500;
-      font-size: 2.4rem;
+      color: $text-color-darker-600;
+      font-size: 2rem;
       // position: absolute;
-      // top: 15rem;
+      // top: 13rem;
     }
   }
   .login-icon {
     // position: absolute;
-    // top: 30rem;
+    // top: 22rem;
+    margin-top: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,11 +48,6 @@
   align-items: center;
   gap: 2rem;
 
-  .error {
-    color: red;
-    font-size: 1.2rem;
-  }
-
   input {
     padding: 1.5rem;
     border: none;
@@ -65,9 +60,16 @@
     background-color: $background-color;
   }
 
+  input:focus {
+    outline: none;
+    text-decoration: none;
+    border: 2px solid $ligher-blue;
+    border-radius: 5px;
+  }
+
   .button {
     margin-top: 2rem;
-
+    width: 100%;
     @include button-styles($ligher-blue, $text-color);
   }
 

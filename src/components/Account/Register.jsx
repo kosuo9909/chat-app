@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom';
-import './Login.scss';
-import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import './Register.scss';
 import auth from '../API/firebase';
-const Login = () => {
-  const [formContents, setFormContents] = useState({ email: '', password: '' });
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+const Register = () => {
+  const [formContents, setFormContents] = useState({
+    email: '',
+    password: '',
+    password2: '',
+  });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
     general: '',
   });
-
   const handleInputChange = (e) => {
     setFormContents({ ...formContents, [e.target.name]: e.target.value });
   };
@@ -30,6 +33,10 @@ const Login = () => {
       newErrors.password = `Password should be at least 6 characters long, yours is ${formContents.password.length}`;
     }
 
+    if (formContents.password !== formContents.password2) {
+      newErrors.password2 = 'The passwords do not match';
+    }
+
     setErrors(newErrors);
 
     return Object.values(newErrors).every((error) => error === '');
@@ -41,7 +48,7 @@ const Login = () => {
 
     if (isFormValid) {
       setErrors({ email: '', password: '' });
-      signInWithEmailAndPassword(
+      createUserWithEmailAndPassword(
         auth,
         formContents.email,
         formContents.password
@@ -55,11 +62,15 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorMessage);
-          if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+          if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
             setErrors({
-              general: 'This user does not exist. Please try again.',
+              general: 'This email address already exists.',
             });
-            setFormContents({ email: '', password: '' });
+            setFormContents({
+              email: '',
+              password: '',
+              password2: '',
+            });
           }
         });
     }
@@ -67,8 +78,7 @@ const Login = () => {
   return (
     <div className='login-container'>
       <div className='login'>
-        <p>Welcome back!</p>
-
+        <p>Let's get you started.</p>
         <div className='login-icon'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -85,29 +95,35 @@ const Login = () => {
         <form onSubmit={handleSubmit} className='form'>
           <input
             type='email'
-            name='email'
-            value={formContents.email}
             placeholder='Email'
+            name='email'
             onChange={handleInputChange}
           ></input>
           <label className='error'>{errors.email && errors.email}</label>
           <label className='error'>{errors.general && errors.general}</label>
+          <input
+            type='password'
+            placeholder='Password'
+            name='password'
+            onChange={handleInputChange}
+          ></input>
+          <label className='error'>{errors.password && errors.password}</label>
+          <label className='error'>
+            {errors.password2 && errors.password2}
+          </label>
 
           <input
             type='password'
-            name='password'
-            placeholder='Password'
+            placeholder='Repeat password'
+            name='password2'
             onChange={handleInputChange}
-            value={formContents.password}
           ></input>
-          <label className='error'>{errors.password && errors.password}</label>
-
-          <button className='button'>Log In</button>
+          <button className='button'>Register</button>
           <span>
-            No account yet?{' '}
+            You already have an account?{' '}
             <Link to='/register' className='link'>
               {' '}
-              Register now.
+              Log in.
             </Link>
           </span>
         </form>
@@ -116,4 +132,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
