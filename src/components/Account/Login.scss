@@ -1,0 +1,55 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.login-container {
+  margin: 0 auto;
+  margin-top: 12.8rem;
+  width: 40rem;
+  height: 50rem;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-icon {
+    position: absolute;
+    top: 24rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-svg {
+    height: 12rem;
+    width: 12rem;
+    color: $ligher-blue;
+  }
+}
+
+.form {
+  margin-top: 9.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  input {
+    padding: 1.5rem;
+    border: none;
+    // border-radius: 10px;
+    box-shadow: 0;
+    color: $text-color;
+    font-size: 1.8rem;
+    letter-spacing: 1.2px;
+    border-bottom: 1px solid white;
+    background-color: $background-color;
+  }
+
+  .button {
+    margin-top: 2rem;
+    @include button-styles($ligher-blue, $text-color);
+  }
+}

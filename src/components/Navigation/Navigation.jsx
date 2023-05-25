@@ -3,14 +3,20 @@ import './Navigation.scss';
 
 const Navigation = () => {
   return (
-    <div className='navigation'>
-      <div className='logo-left'>Logo</div>
-      <div className='items-right'>
-        <Link className='link'>Login</Link>
-        <Link className='link'>Register</Link>
+    <>
+      <div className='main-nav'>
+        <div className='navigation'>
+          <div className='logo-left'>Logo</div>
+          <div className='items-right'>
+            <Link to='/login' className='link'>
+              Login
+            </Link>
+            <Link className='link'>Register</Link>
+          </div>
+        </div>
       </div>
       <Outlet />
-    </div>
+    </>
   );
 };
 
