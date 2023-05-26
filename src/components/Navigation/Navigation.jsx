@@ -6,7 +6,11 @@ const Navigation = () => {
     <>
       <div className='main-nav'>
         <div className='navigation'>
-          <div className='logo-left'>Logo</div>
+          <div className='logo-left'>
+            <Link to='/' className='link'>
+              Logo
+            </Link>
+          </div>
           <div className='items-right'>
             <Link to='/login' className='link'>
               Login

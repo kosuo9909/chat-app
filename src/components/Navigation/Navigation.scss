@@ -22,19 +22,18 @@
     .items-right {
       display: flex;
       gap: 3rem;
+    }
+    .link {
+      text-decoration: none;
+      color: $text-color;
+      font-weight: bold;
+      letter-spacing: 0.7px;
+      transition: all 0.2s ease-in;
+    }
 
-      .link {
-        text-decoration: none;
-        color: $text-color;
-        font-weight: bold;
-        letter-spacing: 0.7px;
-        transition: all 0.2s ease-in;
-      }
-
-      .link:hover,
-      .link:active {
-        color: $baby-blue;
-      }
+    .link:hover,
+    .link:active {
+      color: $baby-blue;
     }
   }
 }
