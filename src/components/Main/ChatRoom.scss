@@ -1,7 +1,10 @@
 @use '../styles/variables' as *;
 
 .room-top-layer {
+  max-width: 120rem;
+  margin: 0 auto;
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,6 +28,7 @@
   .room-flex {
     display: flex;
     align-items: center;
+
     justify-content: center;
     color: $text-color;
     font-size: 3rem;
@@ -32,30 +36,42 @@
 }
 
 .room-all-messages {
-  display: flex;
+  max-height: 45rem;
+  overflow-y: auto;
+  // display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 5rem;
   margin-bottom: 7.6rem;
-
-  .message-time {
-    font-size: 1.4rem;
-    color: $text-color-darker-600;
-  }
-  .message-user {
-    font-size: 1.6rem;
-    margin-left: 0.5rem;
-    color: $text-color-darker-500;
-  }
-  .message-text {
-    display: inline-block;
-    font-size: 1.8rem;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    max-width: 60rem;
-    margin-left: 2rem;
-  }
 }
 
+.message-time {
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  color: $text-color-darker-600;
+}
+.message-user {
+  font-size: 1.6rem;
+  margin-left: 0.5rem;
+  color: $text-color-darker-600;
+}
+.message-text {
+  display: inline-block;
+  font-size: 1.8rem;
+  word-wrap: break-word;
+  // overflow-wrap: break-word; // This line is especially important.
+  min-width: 60rem; // Adjust this as needed to fit your layout.
+  max-width: 60rem;
+  margin-left: 2rem;
+
+  .message-text {
+    width: 100%;
+    white-space: pre-wrap; /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* Opera <7 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer */
+  }
+}
 .room-send-message {
   margin-top: 6rem;
   display: flex;

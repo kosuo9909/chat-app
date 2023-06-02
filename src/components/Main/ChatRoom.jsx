@@ -73,7 +73,7 @@ const ChatRoom = (props) => {
     updates[
       '/chatrooms/' + roomId + '/messages/' + currentUserId + '/' + newPostKey
     ] = messageData;
-
+    setInput('');
     return update(ref(db), updates);
   };
   console.log(allMessages);
@@ -88,13 +88,16 @@ const ChatRoom = (props) => {
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
           {allMessages &&
-            Object.values(allMessages).map((messageObject, index) =>
-              Object.values(messageObject).map((message, innerIndex) => (
-                <ChatRoomMessage
-                  key={`${index}-${innerIndex}`}
-                  message={message}
-                />
-              ))
+            Object.values(allMessages)
+            .map((messageObject, index) =>
+              Object.values(messageObject)
+                .reverse()
+                .map((message, innerIndex) => (
+                  <ChatRoomMessage
+                    key={`${index}-${innerIndex}`}
+                    message={message}
+                  />
+                ))
             )}
         </div>
       </div>
@@ -103,6 +106,7 @@ const ChatRoom = (props) => {
           type='text'
           placeholder='Send a message to the room'
           onChange={(e) => setInput(e.target.value)}
+          value={input}
         ></input>
         <button className='button' type='submit'>
           Send

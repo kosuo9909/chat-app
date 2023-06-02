@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 const ChatRoomMessage = ({ message }) => {
   const [showFullText, setShowFullText] = useState(false);
-  const maxLength = 60;
+  const maxLength = 50;
 
   return (
-    <div className='chat-room-message'>
-      <span className='message-time'>On {message.created_at}, </span>
+    // <div className='chat-room-message'>
+    <div className='flex-div'>
       <span className='message-user'>{message.user_email} said: </span>
       <span className='message-text'>
         {showFullText || message.text.length < maxLength
@@ -21,7 +21,9 @@ const ChatRoomMessage = ({ message }) => {
           </button>
         )}
       </span>
+      <span className='message-time'>{message.created_at}</span>
     </div>
+    // </div>
   );
 };
 
