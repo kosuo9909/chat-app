@@ -1,15 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './ChatRoom.scss';
 import auth, { db } from '../API/firebase';
 import { child, onValue, push, ref, update } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import ChatRoomMessage from './ChatRoomMessage';
 
 const ChatRoom = (props) => {
   const [currentUser, setCurrentUser] = useState('not yet');
   const [currentUserId, setCurrentUserId] = useState('not yet');
   const [input, setInput] = useState('');
-  const [showFullText, setShowFullText] = useState(false);
 
   const [allMessages, setAllMessages] = useState('');
 
@@ -78,36 +78,22 @@ const ChatRoom = (props) => {
   };
   console.log(allMessages);
 
-  const maxLength = 120;
+  const maxLength = 80;
   return (
     <div className='room-top-layer'>
+      <div to='/' className='back-to-rooms'>
+        You are currently in the "{roomId}" Chatroom.
+      </div>
       <div className='room-flex'>
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
           {allMessages &&
             Object.values(allMessages).map((messageObject, index) =>
               Object.values(messageObject).map((message, innerIndex) => (
-                <p key={`${index}-${innerIndex}`} className='message-content'>
-                  <span className='message-time'>
-                    On {message.created_at},{' '}
-                  </span>
-                  <span className='message-user'>
-                    {message.user_email} said:{' '}
-                  </span>
-                  <span className='message-text'>
-                    {showFullText || message.text.length < maxLength
-                      ? message.text
-                      : message.text.substring(0, maxLength) + '...'}
-                    {message.text.length > maxLength && (
-                      <button
-                        className='button'
-                        onClick={() => setShowFullText(!showFullText)}
-                      >
-                        {showFullText ? 'Show Less' : 'Show More'}
-                      </button>
-                    )}
-                  </span>
-                </p>
+                <ChatRoomMessage
+                  key={`${index}-${innerIndex}`}
+                  message={message}
+                />
               ))
             )}
         </div>
@@ -122,6 +108,9 @@ const ChatRoom = (props) => {
           Send
         </button>
       </form>
+      <Link to='/' className='back-to-rooms link'>
+        Back to all rooms
+      </Link>
     </div>
   );
 };
