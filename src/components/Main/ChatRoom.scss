@@ -1,3 +1,5 @@
+@use '../styles/variables' as *;
+
 .room-top-layer {
   display: flex;
   flex-direction: column;
@@ -17,8 +19,55 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  .message-time {
+    font-size: 1.4rem;
+    color: $text-color-darker-600;
+  }
+  .message-user {
+    font-size: 1.6rem;
+    margin-left: 0.5rem;
+    color: $text-color-darker-500;
+  }
+  .message-text {
+    display: inline-block;
+    font-size: 1.8rem;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    max-width: 60rem;
+    margin-left: 2rem;
+  }
 }
 
-.white-color {
-  color: white;
+.room-send-message {
+  margin-top: 6rem;
+  display: flex;
+  gap: 1rem;
+
+  input {
+    padding: 1rem;
+    width: 30rem;
+    border-radius: 10px;
+    border: 0;
+  }
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  color: $text-color;
+}
+
+.button {
+  background-color: inherit;
+  border: none;
+  color: $baby-blue;
+  font-weight: bold;
+  padding: 0.5rem;
+
+  font-size: 1.4rem;
+}
+.button:active,
+.button:hover {
+  cursor: pointer;
 }

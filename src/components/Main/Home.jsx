@@ -24,7 +24,7 @@ const Home = () => {
               key={room.id}
               className='home-room-button'
             >
-              ({Object.values(room.messages).length / 4}) {room.name}
+              {room.name}
             </Link>
           ))}
       </div>

@@ -9,6 +9,7 @@ const ChatRoom = (props) => {
   const [currentUser, setCurrentUser] = useState('not yet');
   const [currentUserId, setCurrentUserId] = useState('not yet');
   const [input, setInput] = useState('');
+  const [showFullText, setShowFullText] = useState(false);
 
   const [allMessages, setAllMessages] = useState('');
 
@@ -31,12 +32,10 @@ const ChatRoom = (props) => {
   let currentDate = new Date();
 
   let options = {
-    year: 'numeric',
     month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric',
   };
 
   let readableDate = currentDate.toLocaleString('en-US', options);
@@ -53,7 +52,7 @@ const ChatRoom = (props) => {
       const data = snapshot.val();
       setAllMessages(data.messages);
 
-      console.log(data.messages);
+      // console.log(data.messages);
     });
   }, [roomId]);
 
@@ -77,29 +76,51 @@ const ChatRoom = (props) => {
 
     return update(ref(db), updates);
   };
+  console.log(allMessages);
+
+  const maxLength = 120;
   return (
     <div className='room-top-layer'>
       <div className='room-flex'>
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
-          {Object.values(allMessages).map((messageObject, index) =>
-            Object.values(messageObject).map((message, innerIndex) => (
-              <p key={`${index}-${innerIndex}`} className='white-color'>
-                <span>On {message.created_at}, </span>
-                <span>{message.user_email} said: </span>
-                {message.text}
-              </p>
-            ))
-          )}
+          {allMessages &&
+            Object.values(allMessages).map((messageObject, index) =>
+              Object.values(messageObject).map((message, innerIndex) => (
+                <p key={`${index}-${innerIndex}`} className='message-content'>
+                  <span className='message-time'>
+                    On {message.created_at},{' '}
+                  </span>
+                  <span className='message-user'>
+                    {message.user_email} said:{' '}
+                  </span>
+                  <span className='message-text'>
+                    {showFullText || message.text.length < maxLength
+                      ? message.text
+                      : message.text.substring(0, maxLength) + '...'}
+                    {message.text.length > maxLength && (
+                      <button
+                        className='button'
+                        onClick={() => setShowFullText(!showFullText)}
+                      >
+                        {showFullText ? 'Show Less' : 'Show More'}
+                      </button>
+                    )}
+                  </span>
+                </p>
+              ))
+            )}
         </div>
       </div>
       <form className='room-send-message' onSubmit={submitHandler}>
         <input
           type='text'
-          placeholder='Let us send a message'
+          placeholder='Send a message to the room'
           onChange={(e) => setInput(e.target.value)}
         ></input>
-        <button type='submit'>Send</button>
+        <button className='button' type='submit'>
+          Send
+        </button>
       </form>
     </div>
   );
