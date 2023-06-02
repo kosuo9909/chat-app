@@ -4,7 +4,8 @@ import Navigation from './components/Navigation/Navigation';
 import Login from './components/Account/Login';
 import Register from './components/Account/Register';
 import Home from './components/Main/Home';
-import { Query, QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import ChatRoom from './components/Main/ChatRoom';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ function App() {
         { path: '', element: <Home /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
+        { path: 'room/:roomId', element: <ChatRoom /> },
       ],
     },
   ]);

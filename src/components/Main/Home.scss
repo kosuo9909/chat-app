@@ -1,3 +1,5 @@
+@use '../styles/variables' as *;
+
 .home-flex {
   margin: 0 auto;
   margin-top: 9.6rem;
@@ -6,6 +8,18 @@
 
   align-items: center;
   justify-items: center;
+
+  .home-room-button {
+    text-decoration: none;
+    font-size: 2rem;
+    color: $text-color;
+  }
+
+  .home-room-button:active,
+  .home-room-button:hover {
+    cursor: pointer;
+    color: $baby-blue;
+  }
 }
 
 .home-welcome {
@@ -13,4 +27,9 @@
   font-size: 1.8rem;
   // background-color: white;
   padding: 4rem;
+}
+
+.home-rooms {
+  display: flex;
+  gap: 3rem;
 }
