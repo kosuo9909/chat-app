@@ -50,27 +50,20 @@
   color: $text-color-darker-600;
 }
 .message-user {
+  display: inline-block;
   font-size: 1.6rem;
   margin-left: 0.5rem;
   color: $text-color-darker-600;
+  min-width: 20rem;
+  max-width: 20rem;
 }
 .message-text {
   display: inline-block;
   font-size: 1.8rem;
   word-wrap: break-word;
-  // overflow-wrap: break-word; // This line is especially important.
-  min-width: 60rem; // Adjust this as needed to fit your layout.
+  min-width: 60rem;
   max-width: 60rem;
   margin-left: 2rem;
-
-  .message-text {
-    width: 100%;
-    white-space: pre-wrap; /* CSS3 */
-    white-space: -moz-pre-wrap; /* Firefox */
-    white-space: -pre-wrap; /* Opera <7 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word; /* Internet Explorer */
-  }
 }
 .room-send-message {
   margin-top: 6rem;

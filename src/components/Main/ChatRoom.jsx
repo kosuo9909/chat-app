@@ -20,7 +20,7 @@ const ChatRoom = (props) => {
         setCurrentUser(user.email);
         setCurrentUserId(user.uid);
       } else {
-        setCurrentUser('No user is signed in');
+        setCurrentUser('Guest');
       }
     });
 
@@ -70,9 +70,7 @@ const ChatRoom = (props) => {
 
     // Write the new data for the specific user.
     const updates = {};
-    updates[
-      '/chatrooms/' + roomId + '/messages/' + currentUserId + '/' + newPostKey
-    ] = messageData;
+    updates['/chatrooms/' + roomId + '/messages/' + newPostKey] = messageData;
     setInput('');
     return update(ref(db), updates);
   };
@@ -89,16 +87,10 @@ const ChatRoom = (props) => {
         <div className='room-all-messages'>
           {allMessages &&
             Object.values(allMessages)
-            .map((messageObject, index) =>
-              Object.values(messageObject)
-                .reverse()
-                .map((message, innerIndex) => (
-                  <ChatRoomMessage
-                    key={`${index}-${innerIndex}`}
-                    message={message}
-                  />
-                ))
-            )}
+              .reverse()
+              .map((message, index) => (
+                <ChatRoomMessage key={`${index}`} message={message} />
+              ))}
         </div>
       </div>
       <form className='room-send-message' onSubmit={submitHandler}>

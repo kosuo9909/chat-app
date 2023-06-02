@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Account.scss';
 import auth from '../API/firebase';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 const Register = () => {
+  const navigate = useNavigate();
   const [formContents, setFormContents] = useState({
     email: '',
     password: '',
@@ -74,6 +75,7 @@ const Register = () => {
           }
         });
     }
+    navigate('/');
   };
   return (
     <div className='login-container'>

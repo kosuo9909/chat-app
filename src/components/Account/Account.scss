@@ -50,8 +50,8 @@
 
   input {
     padding: 1.5rem;
+    height: 5.3rem;
     border: none;
-    // border-radius: 10px;
     box-shadow: 0;
     color: $text-color;
     font-size: 1.8rem;
@@ -69,7 +69,7 @@
 
   .button {
     margin-top: 2rem;
-    width: 100%;
+    max-width: 24.4rem;
     @include button-styles($ligher-blue, $text-color);
   }
 
