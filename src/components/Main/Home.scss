@@ -31,5 +31,27 @@
 
 .home-rooms {
   display: flex;
+  flex-direction: column;
   gap: 3rem;
+}
+
+.message-counter {
+  display: flex;
+  max-width: 3rem;
+  width: 3rem;
+  border-radius: 4px;
+  background-color: $baby-blue;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.room-group {
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.message-loading {
+  color: white;
 }

@@ -15,16 +15,24 @@ const Home = () => {
   console.log(data);
   return (
     <div className='home-flex'>
-      <div className='home-welcome'>Welcome, here are the available rooms:</div>
+      <div className='home-welcome'>Here are the available rooms:</div>
       <div className='home-rooms'>
+        {isLoading && (
+          <span className='message-loading'>'Loading messages...'</span>
+        )}
         {!isLoading &&
           Object.values(data).map((room) => (
-            <Link
-              to={`/room/${room.name}`}
-              key={room.id}
-              className='home-room-button'
-            >
-              {room.name}
+            <Link to={`/room/${room.name}`} className='room-group'>
+              <span key={room.id} className='home-room-button'>
+                {room.messages && Object.keys(room.messages).length > 0 ? (
+                  <span className='message-counter'>
+                    {Object.keys(room.messages).length}
+                  </span>
+                ) : (
+                  <span className='message-counter'>0 </span>
+                )}
+              </span>
+              <span className='home-room-button'> {room.name}</span>
             </Link>
           ))}
       </div>

@@ -25,6 +25,11 @@
     color: $ligher-blue;
   }
 
+  .back-to-rooms.link.no-user {
+    font-size: 1.8rem;
+    color: $baby-blue;
+  }
+
   .room-flex {
     display: flex;
     align-items: center;
@@ -96,4 +101,8 @@
 .button:active,
 .button:hover {
   cursor: pointer;
+}
+
+.white-test {
+  color: white;
 }

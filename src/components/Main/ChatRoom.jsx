@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 
 const ChatRoom = (props) => {
-  const [currentUser, setCurrentUser] = useState('not yet');
-  const [currentUserId, setCurrentUserId] = useState('not yet');
+  const [currentUser, setCurrentUser] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(false);
   const [input, setInput] = useState('');
 
   const [allMessages, setAllMessages] = useState('');
@@ -85,6 +85,9 @@ const ChatRoom = (props) => {
       <div className='room-flex'>
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
+          {!allMessages && (
+            <span className='white-test'>Loading messages...</span>
+          )}
           {allMessages &&
             Object.values(allMessages)
               .reverse()
@@ -93,20 +96,30 @@ const ChatRoom = (props) => {
               ))}
         </div>
       </div>
-      <form className='room-send-message' onSubmit={submitHandler}>
-        <input
-          type='text'
-          placeholder='Send a message to the room'
-          onChange={(e) => setInput(e.target.value)}
-          value={input}
-        ></input>
-        <button className='button' type='submit'>
-          Send
-        </button>
-      </form>
-      <Link to='/' className='back-to-rooms link'>
-        Back to all rooms
-      </Link>
+      {currentUser !== 'Guest' && (
+        <>
+          <form className='room-send-message' onSubmit={submitHandler}>
+            <input
+              type='text'
+              placeholder='Send a message to the room'
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+            ></input>
+            <button className='button' type='submit'>
+              Send
+            </button>
+          </form>
+          <Link to='/' className='back-to-rooms link'>
+            Back to all rooms
+          </Link>
+        </>
+      )}
+
+      {currentUser === 'Guest' && (
+        <Link to='/login' className='back-to-rooms link no-user'>
+          Log in to send a message
+        </Link>
+      )}
     </div>
   );
 };

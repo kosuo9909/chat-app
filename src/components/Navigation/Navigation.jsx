@@ -37,27 +37,29 @@ const Navigation = () => {
         <div className='navigation'>
           <div className='logo-left'>
             <Link to='/' className='link'>
-              Logo
+              Home
             </Link>
           </div>
-          <div className='items-right'>
-            {!currentUser && (
-              <>
-                {' '}
-                <Link to='/login' className='link'>
-                  Login
+          {currentUser !== '' && (
+            <div className='items-right'>
+              {!currentUser && (
+                <>
+                  {' '}
+                  <Link to='/login' className='link'>
+                    Login
+                  </Link>
+                  <Link to='/register' className='link'>
+                    Register
+                  </Link>{' '}
+                </>
+              )}
+              {currentUser && (
+                <Link onClick={signOutHandler} className='link'>
+                  Log Out
                 </Link>
-                <Link to='/register' className='link'>
-                  Register
-                </Link>{' '}
-              </>
-            )}
-            {currentUser && (
-              <Link onClick={signOutHandler} className='link'>
-                Log Out
-              </Link>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <Outlet />
