@@ -44,13 +44,12 @@ const Navigation = () => {
             <div className='items-right'>
               {!currentUser && (
                 <>
-                  {' '}
                   <Link to='/login' className='link'>
                     Login
                   </Link>
                   <Link to='/register' className='link'>
                     Register
-                  </Link>{' '}
+                  </Link>
                 </>
               )}
               {currentUser && (

@@ -17,9 +17,7 @@ const Home = () => {
     <div className='home-flex'>
       <div className='home-welcome'>Here are the available rooms:</div>
       <div className='home-rooms'>
-        {isLoading && (
-          <span className='message-loading'>'Loading messages...'</span>
-        )}
+        {isLoading && <span className='message-loading'>Loading rooms...</span>}
         {!isLoading &&
           Object.values(data).map((room) => (
             <Link to={`/room/${room.name}`} className='room-group'>
