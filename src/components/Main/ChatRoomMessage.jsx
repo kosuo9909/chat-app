@@ -1,4 +1,4 @@
-import { child, push, ref, remove, update } from 'firebase/database';
+import { ref, remove, update } from 'firebase/database';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../API/firebase';
 
@@ -11,8 +11,6 @@ const ChatRoomMessage = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.text);
-
-  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const [showFullText, setShowFullText] = useState(false);
   const maxLength = 51;
@@ -40,8 +38,8 @@ const ChatRoomMessage = ({
       dialogRef.current.close();
     }
   };
-  const inputRef = useRef(null);
   const dialogRef = useRef(null);
+  const inputRef = useRef(null);
   const doneEditHandler = () => {
     const newMessage = { ...message, text: inputRef.current.value };
 

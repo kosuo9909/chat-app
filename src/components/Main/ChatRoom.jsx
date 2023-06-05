@@ -1,18 +1,44 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './ChatRoom.scss';
 import auth, { db } from '../API/firebase';
-import { child, onValue, push, ref, update } from 'firebase/database';
+import { child, onValue, push, ref, remove, update } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ChatRoomMessage from './ChatRoomMessage';
 
 const ChatRoom = (props) => {
   const [currentUser, setCurrentUser] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(false);
   const [input, setInput] = useState('');
-
+  const navigate = useNavigate();
   const [allMessages, setAllMessages] = useState(null);
   const [roomOwner, setRoomowner] = useState(null);
+
+  // Get URL params
+  const { roomId } = useParams();
+
+  const deleteHandler = () => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
+
+  const confirmDelete = () => {
+    // delete message
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+    navigate('/');
+
+    return remove(ref(db, '/chatrooms/' + roomId));
+  };
+
+  const cancelDelete = () => {
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+  };
+  const dialogRef = useRef(null);
 
   // Get user email
   useEffect(() => {
@@ -40,9 +66,6 @@ const ChatRoom = (props) => {
   };
 
   let readableDate = currentDate.toLocaleString('en-US', options);
-
-  // Get URL params
-  const { roomId } = useParams();
 
   // Get a reference to chatrooms/roomId
   useEffect(() => {
@@ -134,10 +157,27 @@ const ChatRoom = (props) => {
             <Link to='/' className='back-to-rooms link'>
               Back to all rooms
             </Link>
-            <span className='white-test'> or </span>
             {roomOwner === currentUserId && (
-              <button className='button'>Delete this room</button>
+              <>
+                <span className='white-test'> or </span>
+                <button onClick={deleteHandler} className='button light'>
+                  Delete this room
+                </button>
+              </>
             )}
+            <dialog ref={dialogRef}>
+              <div className='dialog-content'>
+                <p>Are you sure you want to delete this room?</p>
+                <div className='flex-div-buttons'>
+                  <button className='button large' onClick={confirmDelete}>
+                    Yes
+                  </button>
+                  <button className='button large' onClick={cancelDelete}>
+                    No
+                  </button>
+                </div>
+              </div>
+            </dialog>
           </div>
         </>
       )}

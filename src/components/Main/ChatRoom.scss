@@ -23,11 +23,6 @@
     color: $baby-blue;
   }
 
-  .back-to-rooms.link {
-    font-size: 1.4rem;
-    color: $ligher-blue;
-  }
-
   .back-to-rooms.link.no-user {
     font-size: 1.8rem;
     color: $baby-blue;
@@ -115,7 +110,7 @@ input {
 }
 
 .white-test {
-  color: white;
+  color: $text-color-darker-500;
 }
 
 .message-loading {
@@ -160,6 +155,18 @@ dialog {
   font-size: 1.8rem;
 }
 
+.button.light {
+  font-size: 1.6rem;
+  color: $ligher-blue;
+  font-weight: normal;
+}
+
+.back-to-rooms.link {
+  font-size: 1.6rem;
+  color: $ligher-blue;
+  padding: 0.5rem;
+}
+
 .flex-div-buttons {
   display: flex;
   gap: 2rem;
@@ -177,4 +184,8 @@ dialog {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  span {
+    font-size: 1.2rem;
+  }
 }
