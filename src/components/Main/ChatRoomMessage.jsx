@@ -12,17 +12,38 @@ const ChatRoomMessage = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.text);
 
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
   const [showFullText, setShowFullText] = useState(false);
   const maxLength = 51;
 
   const editHandler = () => {
     setIsEditing((prevState) => !prevState);
   };
+
+  const deleteHandler = () => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
+
+  const confirmDelete = () => {
+    // delete message
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+    console.log('Message deleted');
+  };
+
+  const cancelDelete = () => {
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+  };
   const inputRef = useRef(null);
+  const dialogRef = useRef(null);
   const doneEditHandler = () => {
     const newMessage = { ...message, text: inputRef.current.value };
-
-    const newPostKey = push(child(ref(db), 'posts')).key;
 
     // Write the new data for the specific user.
     const updates = {};
@@ -68,11 +89,27 @@ const ChatRoomMessage = ({
           <button className='button' onClick={editHandler}>
             Edit
           </button>
-          <button className='button' onClick={editHandler}>
+
+          <button className='button' onClick={deleteHandler}>
             Delete
           </button>
+
+          <dialog ref={dialogRef}>
+            <div className='dialog-content'>
+              <p>Are you sure you want to delete this message?</p>
+              <div className='flex-div-buttons'>
+                <button className='button large' onClick={confirmDelete}>
+                  Yes
+                </button>
+                <button className='button large' onClick={cancelDelete}>
+                  No
+                </button>
+              </div>
+            </div>
+          </dialog>
         </>
       )}
+
       {isEditing && (
         <>
           <input
