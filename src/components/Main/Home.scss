@@ -48,6 +48,10 @@
   justify-content: center;
 }
 
+.message-counter:hover {
+  color: white;
+}
+
 .room-group {
   display: flex;
   gap: 1rem;
@@ -61,4 +65,9 @@
 .flex-input {
   display: flex;
   gap: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border: none;
 }
