@@ -1,4 +1,4 @@
-import { child, push, ref, update } from 'firebase/database';
+import { child, push, ref, remove, update } from 'firebase/database';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../API/firebase';
 
@@ -32,7 +32,7 @@ const ChatRoomMessage = ({
     if (dialogRef.current) {
       dialogRef.current.close();
     }
-    console.log('Message deleted');
+    return remove(ref(db, '/chatrooms/' + room_id + '/messages/' + message_id));
   };
 
   const cancelDelete = () => {
