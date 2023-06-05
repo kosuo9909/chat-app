@@ -15,7 +15,7 @@ const Home = () => {
   console.log(data);
   return (
     <div className='home-flex'>
-      <div className='home-welcome'>Here are the available rooms:</div>
+      <div className='home-welcome'>Here are the available chat rooms:</div>
       <div className='home-rooms'>
         {isLoading && <span className='message-loading'>Loading rooms...</span>}
         {!isLoading &&

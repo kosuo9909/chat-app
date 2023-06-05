@@ -60,13 +60,16 @@ const ChatRoom = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // Get a key for a new Message.
+    const newPostKey = push(child(ref(db), 'posts')).key;
+
     let messageData = {
       user_email: currentUser,
       created_at: readableDate,
       text: input,
+      uid: currentUserId,
+      message_id: newPostKey,
     };
-    // Get a key for a new Message.
-    const newPostKey = push(child(ref(db), 'posts')).key;
 
     // Write the new data for the specific user.
     const updates = {};
@@ -97,7 +100,13 @@ const ChatRoom = (props) => {
             Object.values(allMessages)
               .reverse()
               .map((message, index) => (
-                <ChatRoomMessage key={`${index}`} message={message} />
+                <ChatRoomMessage
+                  key={`${index}`}
+                  message={message}
+                  user_id={currentUserId}
+                  owner_id={message.uid}
+                  message_id={message.message_id}
+                />
               ))}
         </div>
       </div>
