@@ -116,7 +116,7 @@ const ChatRoom = (props) => {
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
           {!allMessages && allMessages === null && (
-            <span className='white-test'>Loading messages...</span>
+            <span className='white-test'>This room does not exist.</span>
           )}
           {allMessages === undefined || allMessages === '' ? (
             <span className='white-test'>
@@ -140,7 +140,7 @@ const ChatRoom = (props) => {
               ))}
         </div>
       </div>
-      {currentUser !== 'Guest' && (
+      {currentUser !== 'Guest' && allMessages !== null && (
         <>
           <form className='room-send-message' onSubmit={submitHandler}>
             <input
