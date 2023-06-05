@@ -25,25 +25,25 @@ const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
     <div className='flex-div'>
       <span className='message-user'>{message.user_email} said: </span>
 
-      {!isEditing && owner_id === user_id && (
-        <span className='message-text'>
-          {showFullText || message.text.length < maxLength
-            ? message.text
-            : message.text.substring(0, maxLength) + '...'}
-          {message.text.length > maxLength && (
-            <button
-              className='button'
-              onClick={() => setShowFullText(!showFullText)}
-            >
-              {showFullText ? 'Show Less' : 'Show More'}
-            </button>
-          )}
+      <span className='message-text'>
+        {showFullText || message.text.length < maxLength
+          ? message.text
+          : message.text.substring(0, maxLength) + '...'}
+        {message.text.length > maxLength && (
+          <button
+            className='button'
+            onClick={() => setShowFullText(!showFullText)}
+          >
+            {showFullText ? 'Show Less' : 'Show More'}
+          </button>
+        )}
 
+        {!isEditing && owner_id === user_id && (
           <button className='button' onClick={editHandler}>
             Edit
           </button>
-        </span>
-      )}
+        )}
+      </span>
       {isEditing && (
         <>
           <input
