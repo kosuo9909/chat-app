@@ -106,6 +106,7 @@ const ChatRoom = (props) => {
                   user_id={currentUserId}
                   owner_id={message.uid}
                   message_id={message.message_id}
+                  room_id={roomId}
                 />
               ))}
         </div>

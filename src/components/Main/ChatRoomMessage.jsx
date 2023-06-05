@@ -1,7 +1,14 @@
-import userEvent from '@testing-library/user-event';
+import { child, push, ref, update } from 'firebase/database';
 import { useEffect, useRef, useState } from 'react';
+import { db } from '../API/firebase';
 
-const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
+const ChatRoomMessage = ({
+  message,
+  message_id,
+  user_id,
+  owner_id,
+  room_id,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.text);
 
@@ -11,8 +18,18 @@ const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
   const editHandler = () => {
     setIsEditing((prevState) => !prevState);
   };
-
   const inputRef = useRef(null);
+  const doneEditHandler = () => {
+    const newMessage = { ...message, text: inputRef.current.value };
+
+    const newPostKey = push(child(ref(db), 'posts')).key;
+
+    // Write the new data for the specific user.
+    const updates = {};
+    updates['/chatrooms/' + room_id + '/messages/' + message_id] = newMessage;
+    setIsEditing((prevState) => !prevState);
+    return update(ref(db), updates);
+  };
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -65,7 +82,7 @@ const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
             onChange={(e) => setEditedMessage(e.target.value)}
             onBlur={editHandler}
           ></input>
-          <button className='button' onClick={editHandler}>
+          <button className='button' onMouseDown={doneEditHandler}>
             Done
           </button>
         </>
