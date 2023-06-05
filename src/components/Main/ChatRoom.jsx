@@ -11,7 +11,7 @@ const ChatRoom = (props) => {
   const [currentUserId, setCurrentUserId] = useState(false);
   const [input, setInput] = useState('');
 
-  const [allMessages, setAllMessages] = useState('');
+  const [allMessages, setAllMessages] = useState(null);
 
   // Get user email
   useEffect(() => {
@@ -50,7 +50,9 @@ const ChatRoom = (props) => {
     // Listen for updates and get data
     onValue(messages, (snapshot) => {
       const data = snapshot.val();
-      setAllMessages(data.messages);
+      if (data) {
+        setAllMessages(data.messages);
+      }
 
       // console.log(data.messages);
     });
@@ -88,13 +90,17 @@ const ChatRoom = (props) => {
       <div className='room-flex'>
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
-          {!allMessages && allMessages !== undefined && (
+          {!allMessages && allMessages === undefined && (
             <span className='white-test'>Loading messages...</span>
           )}
-          {allMessages === undefined && (
+          {allMessages === undefined ||
+          allMessages === '' ||
+          allMessages === null ? (
             <span className='white-test'>
               No messages yet. Be the first one to send a message.
             </span>
+          ) : (
+            ''
           )}
           {allMessages &&
             Object.values(allMessages)
