@@ -6,7 +6,7 @@ const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
   const [editedMessage, setEditedMessage] = useState(message.text);
 
   const [showFullText, setShowFullText] = useState(false);
-  const maxLength = 50;
+  const maxLength = 51;
 
   const editHandler = () => {
     setIsEditing((prevState) => !prevState);
@@ -23,23 +23,29 @@ const ChatRoomMessage = ({ message, message_id, user_id, owner_id }) => {
   return (
     // <div className='chat-room-message'>
     <div className='flex-div'>
-      <span className='message-user'>{message.user_email} said: </span>
+      {owner_id === user_id ? (
+        <span className='message-user owner'>{message.user_email} said: </span>
+      ) : (
+        <span className='message-user'>{message.user_email} said: </span>
+      )}
 
       {!isEditing && (
         <span className='message-text'>
-          {showFullText || message.text.length < maxLength
+          {showFullText || message.text.length <= maxLength
             ? message.text
             : message.text.substring(0, maxLength) + '...'}
-          {message.text.length > maxLength && (
-            <button
-              className='button'
-              onClick={() => setShowFullText(!showFullText)}
-            >
-              {showFullText ? 'Show Less' : 'Show More'}
-            </button>
-          )}
         </span>
       )}
+      {owner_id !== user_id && <div className='placeholder'></div>}
+      {message.text.length > maxLength && (
+        <button
+          className='button'
+          onClick={() => setShowFullText(!showFullText)}
+        >
+          {showFullText ? 'Show Less' : 'Show More'}
+        </button>
+      )}
+      {message.text.length <= maxLength && <div className='placeholder'></div>}
       {!isEditing && owner_id === user_id && (
         <>
           <button className='button' onClick={editHandler}>

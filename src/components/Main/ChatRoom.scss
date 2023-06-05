@@ -1,5 +1,8 @@
 @use '../styles/variables' as *;
-
+.flex-div {
+  display: flex;
+  padding: 0.5rem;
+}
 .room-top-layer {
   max-width: 120rem;
   margin: 0 auto;
@@ -61,6 +64,15 @@
   color: $text-color-darker-600;
   min-width: 20rem;
   max-width: 20rem;
+  &.owner {
+    color: $light-teal;
+  }
+}
+
+.placeholder {
+  width: 9rem;
+  height: 2.7rem;
+  visibility: hidden;
 }
 .message-text {
   display: inline-block;
