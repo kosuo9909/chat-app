@@ -12,6 +12,7 @@ const ChatRoom = (props) => {
   const [input, setInput] = useState('');
 
   const [allMessages, setAllMessages] = useState(null);
+  const [roomOwner, setRoomowner] = useState(null);
 
   // Get user email
   useEffect(() => {
@@ -52,6 +53,7 @@ const ChatRoom = (props) => {
       const data = snapshot.val();
       if (data) {
         setAllMessages(data.messages);
+        setRoomowner(data.uid);
       }
 
       // console.log(data.messages);
@@ -128,9 +130,15 @@ const ChatRoom = (props) => {
               Send
             </button>
           </form>
-          <Link to='/' className='back-to-rooms link'>
-            Back to all rooms
-          </Link>
+          <div className='back-delete-flex'>
+            <Link to='/' className='back-to-rooms link'>
+              Back to all rooms
+            </Link>
+            <span className='white-test'> or </span>
+            {roomOwner === currentUserId && (
+              <button className='button'>Delete this room</button>
+            )}
+          </div>
         </>
       )}
 

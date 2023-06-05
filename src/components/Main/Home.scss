@@ -32,6 +32,8 @@
 .home-rooms {
   display: flex;
   flex-direction: column;
+  max-height: 45rem;
+  overflow: scroll;
   gap: 3rem;
 }
 
@@ -54,4 +56,9 @@
 
 .message-loading {
   color: white;
+}
+
+.flex-input {
+  display: flex;
+  gap: 1rem;
 }
