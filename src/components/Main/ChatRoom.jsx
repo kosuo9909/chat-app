@@ -90,12 +90,10 @@ const ChatRoom = (props) => {
       <div className='room-flex'>
         {/* <p>{roomId}</p> */}
         <div className='room-all-messages'>
-          {!allMessages && allMessages === undefined && (
+          {!allMessages && allMessages === null && (
             <span className='white-test'>Loading messages...</span>
           )}
-          {allMessages === undefined ||
-          allMessages === '' ||
-          allMessages === null ? (
+          {allMessages === undefined || allMessages === '' ? (
             <span className='white-test'>
               No messages yet. Be the first one to send a message.
             </span>
