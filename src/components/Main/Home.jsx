@@ -72,25 +72,37 @@ const Home = () => {
             </Link>
           ))}
       </div>
-      <div className='home-welcome'>
-        {!createRoom && (
+      {currentUser ? (
+        <div className='home-welcome'>
+          {!createRoom && (
+            <div>
+              {' '}
+              Or you can also{' '}
+              <button onClick={createHandler} className='button large'>
+                create a new room
+              </button>
+            </div>
+          )}
+          {createRoom && (
+            <div className='flex-input'>
+              <input ref={inputRef} placeholder='Name your room'></input>
+              <button onClick={submitHandler} className='button'>
+                Create room
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className='home-welcome'>
           <div>
-            {' '}
-            Or you can also{' '}
-            <button onClick={createHandler} className='button large'>
-              create a new room
-            </button>
+            You can{' '}
+            <Link to='/login' className='button large'>
+              Log In
+            </Link>{' '}
+            to create your own room
           </div>
-        )}
-        {createRoom && (
-          <div className='flex-input'>
-            <input ref={inputRef} placeholder='Name your room'></input>
-            <button onClick={submitHandler} className='button'>
-              Create room
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
