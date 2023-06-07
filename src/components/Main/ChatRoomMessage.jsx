@@ -60,9 +60,9 @@ const ChatRoomMessage = ({
     // <div className='chat-room-message'>
     <div className='flex-div'>
       {owner_id === user_id ? (
-        <span className='message-user owner'>{message.user_email} said: </span>
+        <span className='message-user owner'>{message.user_email}</span>
       ) : (
-        <span className='message-user'>{message.user_email} said: </span>
+        <span className='message-user'>{message.user_email}</span>
       )}
 
       {!isEditing && (
@@ -83,7 +83,7 @@ const ChatRoomMessage = ({
       )}
       {message.text.length <= maxLength && <div className='placeholder'></div>}
       {!isEditing && owner_id === user_id && (
-        <>
+        <div className='flex-container'>
           <button className='button' onClick={editHandler}>
             Edit
           </button>
@@ -105,7 +105,7 @@ const ChatRoomMessage = ({
               </div>
             </div>
           </dialog>
-        </>
+        </div>
       )}
 
       {isEditing && (

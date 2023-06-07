@@ -89,7 +89,6 @@
 input {
   padding: 1rem;
   width: 30rem;
-  border-radius: 10px;
   border: 0;
 }
 .message-content {
@@ -180,6 +179,12 @@ dialog {
   .large:hover {
     transform: scale(1.05);
   }
+}
+
+.flex-container {
+  display: flex;
+  align-items: start;
+  justify-content: start;
 }
 
 .back-delete-flex {
