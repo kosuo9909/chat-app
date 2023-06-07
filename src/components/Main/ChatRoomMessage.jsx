@@ -81,7 +81,7 @@ const ChatRoomMessage = ({
           {showFullText ? 'Show Less' : 'Show More'}
         </button>
       )}
-      {message.text.length <= maxLength && <div className='placeholder'></div>}
+      {/* {message.text.length <= maxLength && <div className='placeholder'></div>} */}
       {!isEditing && owner_id === user_id && (
         <div className='flex-container'>
           <button className='button' onClick={editHandler}>
@@ -109,7 +109,7 @@ const ChatRoomMessage = ({
       )}
 
       {isEditing && (
-        <>
+        <div className='input-div'>
           <input
             className='message-input'
             value={editedMessage}
@@ -120,7 +120,7 @@ const ChatRoomMessage = ({
           <button className='button' onMouseDown={doneEditHandler}>
             Done
           </button>
-        </>
+        </div>
       )}
 
       <span className='message-time'>{message.created_at}</span>

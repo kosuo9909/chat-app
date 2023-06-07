@@ -33,6 +33,37 @@
   padding: 4rem;
 }
 
+.home-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.8rem;
+  // background-color: white;
+  padding: 4rem;
+}
+
+@media (max-width: 550px) {
+  .home-create {
+    font-size: 1.6rem;
+  }
+
+  .input-border {
+    max-width: 20rem;
+  }
+
+  .error-label {
+    max-width: 25rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .home-welcome {
+    font-size: 1.4rem;
+  }
+}
 .home-rooms {
   display: flex;
   flex-direction: column;

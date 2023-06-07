@@ -100,7 +100,7 @@ const Home = () => {
           ))}
       </div>
       {currentUser ? (
-        <div className='home-welcome'>
+        <div className='home-create'>
           <label className='error-label'>{inputError}</label>
           {!createRoom && (
             <div>
@@ -114,6 +114,7 @@ const Home = () => {
           {createRoom && (
             <div className='flex-input'>
               <input
+                className='input-border'
                 ref={inputRef}
                 placeholder='Name your room'
                 onBlur={cancelCreateHandler}

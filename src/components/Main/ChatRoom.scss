@@ -1,7 +1,39 @@
 @use '../styles/variables' as *;
 .flex-div {
   display: flex;
+  gap: 1rem;
   padding: 0.5rem;
+}
+
+.input-div {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.message-time {
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  color: $text-color-darker-600;
+}
+.message-user {
+  display: inline-block;
+  font-size: 1.6rem;
+  margin-left: 0.5rem;
+  color: $text-color-darker-600;
+  min-width: 20rem;
+  max-width: 20rem;
+  &.owner {
+    color: $light-teal;
+  }
+}
+
+.message-text {
+  display: inline-block;
+  font-size: 1.8rem;
+  word-wrap: break-word;
+  min-width: 60rem;
+  max-width: 69rem;
 }
 .room-top-layer {
   max-width: 120rem;
@@ -50,36 +82,12 @@
   margin-bottom: 7.6rem;
 }
 
-.message-time {
-  font-size: 1.4rem;
-  padding: 0.5rem;
-  color: $text-color-darker-600;
-}
-.message-user {
-  display: inline-block;
-  font-size: 1.6rem;
-  margin-left: 0.5rem;
-  color: $text-color-darker-600;
-  min-width: 20rem;
-  max-width: 20rem;
-  &.owner {
-    color: $light-teal;
-  }
-}
-
 .placeholder {
   width: 9rem;
   height: 2.7rem;
   visibility: hidden;
 }
-.message-text {
-  display: inline-block;
-  font-size: 1.8rem;
-  word-wrap: break-word;
-  min-width: 60rem;
-  max-width: 69rem;
-  margin-left: 2rem;
-}
+
 .room-send-message {
   margin-top: 6rem;
   display: flex;
@@ -90,6 +98,10 @@ input {
   padding: 1rem;
   width: 30rem;
   border: 0;
+}
+
+.input-border {
+  border-radius: 10px;
 }
 .message-content {
   display: flex;
@@ -196,5 +208,96 @@ dialog {
 
   span {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .button.large {
+    font-size: 1.4rem;
+  }
+
+  .back-to-rooms {
+    font-size: 1.2rem !important;
+  }
+
+  .placeholder {
+    width: 0rem;
+    height: 0rem;
+    visibility: hidden;
+  }
+}
+@media (max-width: 550px) {
+  .button.large {
+    font-size: 1.6rem;
+  }
+
+  .white-test {
+    font-size: 1.6rem;
+    padding: 1rem;
+  }
+
+  .button {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .message-text {
+    min-width: 20rem;
+    max-width: 20rem;
+  }
+
+  .message-input {
+    max-width: 25rem;
+    min-width: 25rem;
+  }
+
+  dialog {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 750px) {
+  .room-all-messages {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-div {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr;
+    max-width: 40rem;
+    min-width: 40rem;
+    text-align: center;
+  }
+
+  .flex-container {
+    justify-self: center;
+  }
+
+  .message-input {
+    max-width: 25rem;
+    min-width: 25rem;
+  }
+
+  .message-text {
+    justify-self: center;
+  }
+  .message-time {
+    justify-self: center;
+  }
+  .message-user {
+    justify-self: center;
+  }
+  .message-text {
+    justify-self: center;
+  }
+
+  dialog {
+    font-size: 1.6rem;
   }
 }
