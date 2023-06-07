@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 import auth, { db } from '../API/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 const Home = () => {
+  const [createRoom, setCreateRoom] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
+  const [inputError, setInputError] = useState('');
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -21,6 +23,13 @@ const Home = () => {
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []); // Empty dependency array means this effect runs once on mount and clean up on unmount
+
+  // use effect to focus input on create room so we could then attach on blur
+  useEffect(() => {
+    if (createRoom && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [createRoom]);
   const fetchRooms = async () => {
     const res = await axios.get(
       'https://chat-app-f21db-default-rtdb.firebaseio.com/chatrooms.json'
@@ -28,10 +37,13 @@ const Home = () => {
     return res.data;
   };
   const { isLoading, error, data, refetch } = useQuery('posts', fetchRooms);
-  const [createRoom, setCreateRoom] = useState(false);
   const inputRef = useRef();
   const createHandler = () => {
     setCreateRoom(true);
+    setInputError('');
+  };
+  const cancelCreateHandler = () => {
+    setCreateRoom(false);
   };
   const submitHandler = (e) => {
     // Get a key for a new Message.
@@ -43,13 +55,28 @@ const Home = () => {
     };
 
     // Write the new data for the specific user.
+    if (
+      inputRef.current.value.length < 1 ||
+      inputRef.current.value.length > 20
+    ) {
+      console.log('not happening');
+      setInputError(
+        'Please make sure the name is longer than one symbol and less than 20 symbols.'
+      );
+      return;
+    }
     const updates = {};
     updates['/chatrooms/' + inputRef.current.value] = messageData;
     setCreateRoom(false);
+    setInputError('');
 
-    update(ref(db), updates).then(() => {
-      refetch();
-    });
+    update(ref(db), updates)
+      .then(() => {
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className='home-flex'>
@@ -74,6 +101,7 @@ const Home = () => {
       </div>
       {currentUser ? (
         <div className='home-welcome'>
+          <label className='error-label'>{inputError}</label>
           {!createRoom && (
             <div>
               {' '}
@@ -85,9 +113,16 @@ const Home = () => {
           )}
           {createRoom && (
             <div className='flex-input'>
-              <input ref={inputRef} placeholder='Name your room'></input>
-              <button onClick={submitHandler} className='button'>
+              <input
+                ref={inputRef}
+                placeholder='Name your room'
+                onBlur={cancelCreateHandler}
+              ></input>
+              <button onMouseDown={submitHandler} className='button'>
                 Create room
+              </button>
+              <button onClick={cancelCreateHandler} className='button'>
+                Cancel
               </button>
             </div>
           )}
