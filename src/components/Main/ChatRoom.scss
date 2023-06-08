@@ -171,14 +171,15 @@ dialog {
 }
 
 .button.light {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: $ligher-blue;
-  font-weight: normal;
+  padding: 0.5rem;
 }
 
 .back-to-rooms.link {
   font-size: 1.6rem;
   color: $ligher-blue;
+  font-weight: bold;
   padding: 0.5rem;
 }
 
@@ -201,6 +202,7 @@ dialog {
 
 .back-delete-flex {
   margin-top: 4.8rem;
+  padding-bottom: 1rem;
   gap: 1rem;
   display: flex;
   align-items: center;
