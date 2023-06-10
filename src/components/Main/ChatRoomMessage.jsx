@@ -11,7 +11,6 @@ const ChatRoomMessage = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.text);
-
   const [showFullText, setShowFullText] = useState(false);
   const maxLength = 51;
 
@@ -112,7 +111,7 @@ const ChatRoomMessage = ({
         <div className='input-div'>
           <input
             className='message-input'
-            value={editedMessage}
+            value={message.text}
             ref={inputRef}
             onChange={(e) => setEditedMessage(e.target.value)}
             onBlur={editHandler}

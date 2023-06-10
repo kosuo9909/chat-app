@@ -65,6 +65,8 @@ const ChatRoom = (props) => {
     minute: 'numeric',
   };
 
+  let offsetHours = 3;
+  currentDate.setHours(currentDate.getUTCHours() + offsetHours);
   let readableDate = currentDate.toLocaleString('en-US', options);
 
   // Get a reference to chatrooms/roomId
