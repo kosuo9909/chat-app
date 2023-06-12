@@ -106,7 +106,6 @@ const ChatRoom = (props) => {
     setInput('');
     return update(ref(db), updates);
   };
-  console.log(allMessages);
 
   const maxLength = 80;
   return (

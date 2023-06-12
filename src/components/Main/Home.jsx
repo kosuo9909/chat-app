@@ -13,7 +13,6 @@ const Home = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         setCurrentUser(user.uid);
       } else {
         setCurrentUser(false);
@@ -59,7 +58,6 @@ const Home = () => {
       inputRef.current.value.length < 1 ||
       inputRef.current.value.length > 20
     ) {
-      console.log('not happening');
       setInputError(
         'Please make sure the name is longer than one symbol and less than 20 symbols.'
       );
@@ -74,9 +72,7 @@ const Home = () => {
       .then(() => {
         refetch();
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className='home-flex'>
@@ -85,8 +81,12 @@ const Home = () => {
         {isLoading && <span className='message-loading'>Loading rooms...</span>}
         {!isLoading &&
           Object.values(data).map((room) => (
-            <Link to={`/room/${room.name}`} className='room-group'>
-              <span key={room.id} className='home-room-button'>
+            <Link
+              key={room.name}
+              to={`/room/${room.name}`}
+              className='room-group'
+            >
+              <span className='home-room-button'>
                 {room.messages && Object.keys(room.messages).length > 0 ? (
                   <span className='message-counter'>
                     {Object.keys(room.messages).length}

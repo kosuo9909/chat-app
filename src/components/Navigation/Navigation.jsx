@@ -9,7 +9,6 @@ const Navigation = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         setCurrentUser(true);
       } else {
         setCurrentUser(false);
